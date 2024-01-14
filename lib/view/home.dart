@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                           onPressed: () {}, icon: const Icon(Icons.search))),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 180),
+                  padding: EdgeInsets.only(top: 160),
                   child: Text(
                     "30.34\u00b0c",
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -38,45 +38,53 @@ class Home extends StatelessWidget {
                 ),
                 const Text('Clouds'),
                 const Text("location"),
-                Padding(
-                  padding: const EdgeInsets.only(left: 60,right: 60),
-                  child: SizedBox(height: 200,
-                  width: 200,
-                  
-                  child: Row(children: [
-                   SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset("assets/hot-PhotoRoom.png-PhotoRoom.png",fit: BoxFit.fill,),
-                   ),
-                   SizedBox(
-                    height: 90,
-                    width: 60,
-                    child: Image.asset("assets/cold-PhotoRoom.png-PhotoRoom.png",fit: BoxFit.fill,),
-                   )
-                    
-                  ],)),
-                ),
                 SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Row(
-                    children: [
-                     SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset("assets/sun-PhotoRoom.png-PhotoRoom.png",fit: BoxFit.fill,),
-                     ),
-                           SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset("assets/moon-PhotoRoom.png-PhotoRoom.png",fit: BoxFit.fill,),
-                     )
-                    ],
+                  height: 400,
+                  width: 400,
+                  child: Padding(
+                    padding: const EdgeInsets.all(120),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Image.asset(
+                                "assets/hot-PhotoRoom.png-PhotoRoom.png",
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Image.asset(
+                                "assets/cold-PhotoRoom.png-PhotoRoom.png",
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Image.asset(
+                                  "assets/sun-PhotoRoom.png-PhotoRoom.png"),
+                            ),
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: Image.asset(
+                                  "assets/moon-PhotoRoom.png-PhotoRoom.png"),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-               
-
               ],
             ),
           ),
