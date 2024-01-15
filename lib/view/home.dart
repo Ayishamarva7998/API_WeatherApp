@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 const Text('Clouds'),
-                const Text("location"),
+                const Text("location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                 SizedBox(
                   height: 400,
                   width: 400,
