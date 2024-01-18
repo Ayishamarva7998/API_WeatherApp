@@ -149,29 +149,35 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
                     Text(
-                      'clouds',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black45,
+                        'clouds',
+                        // "${value.weather?.}"
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black45,
+                        ),
                       ),
+                    ),
+                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                    Text(
+                        //  "loc",
+                        "${value.weather?.cityName??'N/A'}",
+                          
+                          style: TextStyle( 
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 49, 68, 78),
+                          ),
+                        ),
                     ),
                     // Text(
-                    //    "loc",
-                        
-                    //     style: TextStyle( 
-                    //       fontSize: 30,
-                    //       fontWeight: FontWeight.bold,
-                    //       color: Color.fromARGB(255, 49, 68, 78),
-                    //     ),
+                    //   "celcious",
+                    //   style: TextStyle(
+                    //     fontSize: 25,
+                    //     color: Color.fromARGB(255, 49, 68, 78),
                     //   ),
-                    Text(
-                      "celcious",
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 49, 68, 78),
-                      ),
-                    ),
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 100),
@@ -192,15 +198,18 @@ class _HomePageState extends State<HomePage> {
                             "assets/hot-PhotoRoom.png-PhotoRoom.png",
                             width: 79,
                           ),
-                          const Column(
+                        Column(
                             children: [
                               Text(
                                 "max temp",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Text(
-                                "37.8",
-                                style: TextStyle(color: Colors.white),
+                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                               Text(
+                                  "37.8",
+                                  // "${value.weather?.main?.}"
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           ),
