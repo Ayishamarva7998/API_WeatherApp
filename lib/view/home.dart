@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/location_provider.dart';
-import 'package:flutter_application_1/services/wheather_service_p.dart';
+import 'package:flutter_application_1/services/weather_service_p.dart';
 import 'package:provider/provider.dart';
 
 TextEditingController cityController = TextEditingController();
@@ -135,14 +135,18 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 80),
                  Column(
                   children: [
-                    Text(
-                      "32.c",
-                      // weatherprovider.weather!.main!.temp.toString(),
-                      // weatherprovider.weather!.temp.toString(),
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w200,
-                        color: Color.fromARGB(255, 30, 109, 33),
+                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                  Text(
+                        //  weatherprovider.weather?.main?.temp?.toString() ?? 'N/A',
+                        // "32.c",
+                        // weatherprovider.weather!.main!.temp.toString(),
+                        // weatherprovider.weather!.temp.toString() ??'N/A',
+                        "${value.weather?.temp??'N?A'}",
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w200,
+                          color: Color.fromARGB(255, 30, 109, 33),
+                        ),
                       ),
                     ),
                     Text(

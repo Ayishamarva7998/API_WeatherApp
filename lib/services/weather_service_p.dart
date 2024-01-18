@@ -25,7 +25,7 @@ class WeatherServiceProvider extends ChangeNotifier {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print(data);
+        print("$data");
 
         _weather = Weather.fromJson(data);
         // print(_weather!.cityName);
