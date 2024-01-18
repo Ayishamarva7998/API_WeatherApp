@@ -1,13 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/location_provider.dart';
+import 'package:flutter_application_1/services/wheather_service_p.dart';
+import 'package:provider/provider.dart';
 
 TextEditingController cityController = TextEditingController();
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const HomePage({Key? key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+  
+class _HomePageState extends State<HomePage> {
+
+
+  @override
+  void initState() {
+    final locationProvider=Provider.of<LocationProvider>(context,listen: false);
+    locationProvider.determinePosition().then((_){
+      if(locationProvider.currentLocationname!=null){
+        var city=locationProvider.currentLocationname!.locality;
+        if(city!=null){
+          Provider.of<WeatherServiceProvider>(context,listen: false).WeatherDataByCity(city);
+        }
+      }
+
+    }
+
+    );
+    // Provider.of<LocationProvider>(context,listen: false).determinePosition();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final weatherprovider=Provider.of<WeatherServiceProvider>(context,listen: false);
+
+
+
+    // Provider.of<WeatherServiceProvider>(context,listen: false).WeatherDataByCity("dubai");
 
     return SafeArea(
       child: Scaffold(
@@ -28,7 +61,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
@@ -38,24 +71,26 @@ class HomePage extends StatelessWidget {
                           child: Icon(Icons.location_on, color: Colors.red),
                         ),
                         SizedBox(width: 10),
-                        Column(
-                          children: [
-                            Text(
-                              "unknown location",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                        Consumer<LocationProvider>(builder: (context, value, child) => 
+                         Column(
+                            children: [
+                              Text(
+                                value.currentLocationname?.locality ?? "unknown location",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "Good morning",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 9, 53, 89),
-                              ),
-                            ),
-                          ],
+                              // Text(
+                              //   "Good morning",
+                              //   style: TextStyle(
+                              //     fontSize: 20,
+                              //     fontWeight: FontWeight.bold,
+                              //     color: Color.fromARGB(255, 9, 53, 89),
+                              //   ),
+                              // ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -98,10 +133,12 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 80),
-                const Column(
+                 Column(
                   children: [
                     Text(
                       "32.c",
+                      // weatherprovider.weather!.main!.temp.toString(),
+                      // weatherprovider.weather!.temp.toString(),
                       style: TextStyle(
                         fontSize: 50,
                         fontWeight: FontWeight.w200,
@@ -115,14 +152,15 @@ class HomePage extends StatelessWidget {
                         color: Colors.black45,
                       ),
                     ),
-                    Text(
-                      "location",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 49, 68, 78),
-                      ),
-                    ),
+                    // Text(
+                    //    "loc",
+                        
+                    //     style: TextStyle( 
+                    //       fontSize: 30,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Color.fromARGB(255, 49, 68, 78),
+                    //     ),
+                    //   ),
                     Text(
                       "celcious",
                       style: TextStyle(
