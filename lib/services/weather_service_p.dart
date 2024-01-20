@@ -26,9 +26,7 @@ class WeatherServiceProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         print("$data");
-
         _weather = Weather.fromJson(data);
-        // print(_weather!.cityName);
         notifyListeners();
       } else {
         _error = "failed to load data";

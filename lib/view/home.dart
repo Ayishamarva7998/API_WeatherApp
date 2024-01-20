@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     final locationProvider=Provider.of<LocationProvider>(context,listen: false);
     locationProvider.determinePosition().then((_){
       if(locationProvider.currentLocationname!=null){
@@ -30,17 +31,10 @@ class _HomePageState extends State<HomePage> {
     }
 
     );
-    // Provider.of<LocationProvider>(context,listen: false).determinePosition();
-    super.initState();
   }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final weatherprovider=Provider.of<WeatherServiceProvider>(context,listen: false);
-
-
-
-    // Provider.of<WeatherServiceProvider>(context,listen: false).WeatherDataByCity("dubai");
 
     return SafeArea(
       child: Scaffold(
@@ -137,10 +131,6 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
                   Text(
-                        //  weatherprovider.weather?.main?.temp?.toString() ?? 'N/A',
-                        // "32.c",
-                        // weatherprovider.weather!.main!.temp.toString(),
-                        // weatherprovider.weather!.temp.toString() ??'N/A',
                         "${value.weather?.temp??'N?A'}",
                         style: TextStyle(
                           fontSize: 50,
@@ -206,8 +196,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
                                Text(
-                                  "37.8",
-                                  // "${value.weather?.main?.}"
+                                  // "37.8",
+                                  "${value.weather?.tempmin??"N/A"}",
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
@@ -221,15 +211,18 @@ class _HomePageState extends State<HomePage> {
                             width: 50,
                             // height: 60,
                           ),
-                          const Column(
+                           Column(
                             children: [
                               Text(
                                 "max cold",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Text(
-                                "37.8",
-                                style: TextStyle(color: Colors.white),
+                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                               Text(
+                                  // "37.8",
+                                  "${value.weather?.tempmax??"N/A"}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           )
@@ -247,15 +240,18 @@ class _HomePageState extends State<HomePage> {
                             "assets/sun-PhotoRoom.png-PhotoRoom.png",
                             width: 60,
                           ),
-                          const Column(
+                       Column(
                             children: [
                               Text(
                                 "sun",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Text(
-                                "37.8",
-                                style: TextStyle(color: Colors.white),
+                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                             Text(
+                              "",
+                              //  "${value.weather.}"
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           ),
