@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/location_service.dart';
 import 'package:geocoding/geocoding.dart';
@@ -21,6 +23,7 @@ class LocationProvider extends ChangeNotifier {
 
     if (!serviceEnabled) {
       // Location service is not enabled, prompt the user to enable it
+      
       print("Location service is not enabled.");
       // Open location settings
       await Geolocator.openLocationSettings();
@@ -38,6 +41,7 @@ class LocationProvider extends ChangeNotifier {
 
       if (permission == LocationPermission.denied) {
         // Location permission is denied
+       
         print("Location permission is denied.");
         _currentPosition = null;
         notifyListeners();
@@ -56,9 +60,11 @@ class LocationProvider extends ChangeNotifier {
     try {
     
       _currentPosition = await Geolocator.getCurrentPosition();
+    
       print(_currentPosition);
       // print("Current position: $_currentPosition");
       _currentLocationName=await _locationservices.getLocationName(_currentPosition);
+    
       print(_currentLocationName);
       notifyListeners();
     } catch (e) {

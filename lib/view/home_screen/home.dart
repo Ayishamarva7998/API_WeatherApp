@@ -60,17 +60,17 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(2),
                           child: Icon(Icons.location_on, color: Colors.red),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Consumer<LocationProvider>(builder: (context, value, child) => 
                          Column(
                             children: [
                               Text(
                                 value.currentLocationname?.locality ?? "unknown location",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                     Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
                   Text(
                         "${value.weather?.temp??'N?A'}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.w200,
                           color: Color.fromARGB(255, 30, 109, 33),
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
-                    Text(
+                    const Text(
                         'clouds',
                         // "${value.weather?.}"
                         style: TextStyle(
@@ -151,10 +151,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
                     Text(
-                        //  "loc",
+                      
+                        // ignore: unnecessary_string_interpolations
                         "${value.weather?.cityName??'N/A'}",
                           
-                          style: TextStyle( 
+                          style: const TextStyle( 
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 49, 68, 78),
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         Column(
                             children: [
-                              Text(
+                              const Text(
                                 "max temp",
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -198,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                                Text(
                                   // "37.8",
                                   "${value.weather?.tempmin??"N/A"}",
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ],
@@ -213,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                            Column(
                             children: [
-                              Text(
+                              const Text(
                                 "max cold",
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -221,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                                Text(
                                   // "37.8",
                                   "${value.weather?.tempmax??"N/A"}",
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             ],
@@ -242,12 +243,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                        Column(
                             children: [
-                              Text(
+                              const Text(
                                 "sun",
                                 style: TextStyle(color: Colors.white),
                               ),
                               Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
-                             Text(
+                             const Text(
                               "",
                               //  "${value.weather.}"
                                   style: TextStyle(color: Colors.white),

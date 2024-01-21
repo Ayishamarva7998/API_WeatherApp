@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -14,12 +16,14 @@ class WeatherServiceProvider extends ChangeNotifier {
   String _error = "";
   String get errors => _error;
 
+  // ignore: non_constant_identifier_names
   Future<void> WeatherDataByCity(String city) async {
     _isloading = true;
     _error = "";
 
     try {
       final String apiUrl =
+          // ignore: unnecessary_brace_in_string_interps
           "${APIEndpoints().cityUrl}${city}&appid=${APIEndpoints().apikey}${APIEndpoints().units}";
       print(apiUrl);
       final response = await http.get(Uri.parse(apiUrl));

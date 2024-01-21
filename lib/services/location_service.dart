@@ -12,6 +12,7 @@ class LocationServices {
           return placemarks[0];
         }
       } catch (e) {
+        // ignore: avoid_print
         print("Error fetching location name");
       }
 
