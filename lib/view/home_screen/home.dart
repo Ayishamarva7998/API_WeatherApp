@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/location_provider.dart';
+import 'package:flutter_application_1/controller/weatherprovider.dart';
 import 'package:flutter_application_1/services/weather_service_p.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 TextEditingController cityController = TextEditingController();
@@ -24,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       if(locationProvider.currentLocationname!=null){
         var city=locationProvider.currentLocationname!.locality;
         if(city!=null){
-          Provider.of<WeatherServiceProvider>(context,listen: false).WeatherDataByCity(city);
+          Provider.of<WeatherProvider>(context,listen: false).fetchWeatherDataByCity(city);
         }
       }
 
@@ -75,31 +77,13 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              // Text(
-                              //   "Good morning",
-                              //   style: TextStyle(
-                              //     fontSize: 20,
-                              //     fontWeight: FontWeight.bold,
-                              //     color: Color.fromARGB(255, 9, 53, 89),
-                              //   ),
-                              // ),
+                      
                             ],
                           ),
                         ),
                       ],
                     ),
-                    // Column(
-                    //   children: [
-                    //     const Text("Refresh"),
-                    //     IconButton(
-                    //       onPressed: () {},
-                    //       icon: const Icon(
-                    //         Icons.refresh,
-                    //         color: Colors.blue,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
+             
                   ],
                 ),
                 const SizedBox(height: 15),
@@ -118,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        search();
+                      },
                       icon: const Icon(
                         Icons.search,
                         color: Color.fromARGB(255, 73, 72, 72),
@@ -129,9 +115,9 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 80),
                  Column(
                   children: [
-                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                    Consumer<WeatherProvider>(builder: (context, value, child) => 
                   Text(
-                        "${value.weather?.temp??'N?A'}",
+                        "${value.weather?.temp??'N/A'}",
                         style: const TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.w200,
@@ -139,17 +125,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                    Consumer<WeatherProvider>(builder: (context, value, child) => 
                     const Text(
                         'clouds',
-                        // "${value.weather?.}"
+                      
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black45,
                         ),
                       ),
                     ),
-                    Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                    Consumer<WeatherProvider>(builder: (context, value, child) => 
                     Text(
                       
                         // ignore: unnecessary_string_interpolations
@@ -162,13 +148,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                     ),
-                    // Text(
-                    //   "celcious",
-                    //   style: TextStyle(
-                    //     fontSize: 25,
-                    //     color: Color.fromARGB(255, 49, 68, 78),
-                    //   ),
-                    // ),
+              
                   ],
                 ),
                 const SizedBox(height: 100),
@@ -195,9 +175,9 @@ class _HomePageState extends State<HomePage> {
                                 "max temp",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                              Consumer<WeatherProvider>(builder: (context, value, child) => 
                                Text(
-                                  // "37.8",
+                             
                                   "${value.weather?.tempmin??"N/A"}",
                                   style: const TextStyle(color: Colors.white),
                                 ),
@@ -210,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             "assets/cold-PhotoRoom.png-PhotoRoom.png",
                             width: 50,
-                            // height: 60,
+                        
                           ),
                            Column(
                             children: [
@@ -218,9 +198,9 @@ class _HomePageState extends State<HomePage> {
                                 "max cold",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
+                              Consumer<WeatherProvider>(builder: (context, value, child) => 
                                Text(
-                                  // "37.8",
+                                 
                                   "${value.weather?.tempmax??"N/A"}",
                                   style: const TextStyle(color: Colors.white),
                                 ),
@@ -229,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      const Divider(
+                     const Divider(
                         color: Colors.white,
                         height: 10,
                         thickness: 1.5,
@@ -243,16 +223,19 @@ class _HomePageState extends State<HomePage> {
                           ),
                        Column(
                             children: [
-                              const Text(
-                                "sun",
+                            const Text(
+                                "sunset",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              Consumer<WeatherServiceProvider>(builder: (context, value, child) => 
-                             const Text(
-                              "",
-                              //  "${value.weather.}"
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                              Consumer<WeatherProvider>(builder: (context, value, child) => 
+                              Text(
+                                
+                         
+                                "${value.weather !=null ?  DateFormat("hh:mm").format(DateTime.fromMillisecondsSinceEpoch
+                                (  value.weather!.sunset!*1000)):'N/A'
+                                }",
+                                     style: const TextStyle(color: Colors.white),
+                                   ),
                               ),
                             ],
                           ),
@@ -264,15 +247,21 @@ class _HomePageState extends State<HomePage> {
                             width: 70,
                             color: Colors.white,
                           ),
-                          const Column(
+                       Column(
                             children: [
-                              Text(
-                                "moon",
+                              const Text(
+                                "sunrise",
                                 style: TextStyle(color: Colors.white),
                               ),
+                              Consumer<WeatherProvider>(builder: (context, value, child) => 
                               Text(
-                                "37.8",
-                                style: TextStyle(color: Colors.white),
+                                  "${value.weather !=null ?  DateFormat("hh:mm").format(DateTime.fromMillisecondsSinceEpoch
+                                (  value.weather!.sunrise!*1000)):'N/A'
+                                }",
+                           
+                            
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           )
@@ -287,5 +276,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  search()async{
+    await Provider.of<WeatherProvider>(context,listen: false).fetchWeatherDataByCity(cityController.text.trim());
+
   }
 }

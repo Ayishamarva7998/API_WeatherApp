@@ -7,6 +7,8 @@ class Weather {
   int? pressure;
   double? tempmin;
   double? tempmax;
+  int? sunset;
+  int? sunrise;
   
 
   Weather(
@@ -17,7 +19,9 @@ class Weather {
       this.feels_like,
       this.pressure,
       this.tempmin,
-      this.tempmax
+      this.tempmax,
+      this.sunset,
+     this.sunrise
       });
 
   Weather.fromJson(Map<String, dynamic> json) {
@@ -29,5 +33,7 @@ class Weather {
     feels_like = json["main"]["feels_like"];
     tempmin = json["main"]["temp_min"];
     tempmax = json["main"]["temp_max"];
+    sunset = json['sys']['sunset'];
+    sunrise = json['sys']['sunrise'];
   }
 }
