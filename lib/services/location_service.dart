@@ -2,6 +2,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationServices {
+    // ignore: body_might_complete_normally_nullable
     Future<Placemark?> getLocationName(Position? position) async {
     if (position != null) {
       try {

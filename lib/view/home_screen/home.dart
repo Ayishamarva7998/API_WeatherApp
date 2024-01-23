@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/location_provider.dart';
 import 'package:flutter_application_1/controller/weatherprovider.dart';
-import 'package:flutter_application_1/services/weather_service_p.dart';
+
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -231,6 +231,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 
                          
+                                // ignore: unnecessary_string_interpolations
                                 "${value.weather !=null ?  DateFormat("hh:mm").format(DateTime.fromMillisecondsSinceEpoch
                                 (  value.weather!.sunset!*1000)):'N/A'
                                 }",
@@ -255,6 +256,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Consumer<WeatherProvider>(builder: (context, value, child) => 
                               Text(
+                                  // ignore: unnecessary_string_interpolations
                                   "${value.weather !=null ?  DateFormat("hh:mm").format(DateTime.fromMillisecondsSinceEpoch
                                 (  value.weather!.sunrise!*1000)):'N/A'
                                 }",

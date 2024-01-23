@@ -11,6 +11,7 @@ class WeatherService {
   Future<Weather?> fetchWeatherDataByCity(String city) async {
     try {
       final String apiUrl =
+          // ignore: unnecessary_brace_in_string_interps
           '${APIEndpoints().cityUrl}${city}&appid=${APIEndpoints().apikey}${APIEndpoints().units}';
       final response = await http.get(Uri.parse(apiUrl));
 
